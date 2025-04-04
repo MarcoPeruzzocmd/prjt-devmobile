@@ -26,9 +26,10 @@
                             {{ detail }}
                         </li>
                     </ul>
-                    <div v-for="variant in variants">
+                    <div v-for="variant in variants" :key="variant.id" @mouseover="changeImage(variant.image)">
                         {{ variant.color }}
                     </div>
+                    <button class="button" v-on:click="addToCart">Add to cart</button>
                 </div>
             </div>
         </div>
@@ -39,12 +40,23 @@
 
     createApp({
         setup() {
+            const image = ref("assets/images/tshirtblue.png");
+            const changeImage = (variantImage) => {
+                image.value = variantImage
+            }
+            const cart = ref(0);
+            const addToCart = () =>{
+                cart.value +=1
+            }
             return {
                 product_title: ref('T-Shirt'),
-                image: ref("./assets/images/tshirtblue.png"),
+                image,
                 InStock: ref(9),
                 details:['50% cotton', '30% polyester', '20% wool'],
-                variants: [{id:1, color:'blue'},{id:2, color:'green'}]
+                variants: [{id:1, color:'blue', image:"assets/images/tshirtblue.png"},{id:2, color:'green', image:"assets/images/tshirtgreen.png"}],
+                cart,
+                addToCart,
+                changeImage
             };
         }
     }).mount('#app')
