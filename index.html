@@ -17,7 +17,7 @@
                     <img :src="image" alt="img-product">
                 </div>
                 <div class="product-info">
-                    <h1>{{ product_title }}</h1>
+                    <h1>{{ product_title + " " + brand }}</h1>
                     <p v-if="InStock >= 10">In Stock</p>
                     <p v-else-if="InStock < 10 && InStock >=1">Almost of out</p>
                     <p v-else>Out of stock</p>
@@ -52,6 +52,7 @@
             }
             return {
                 product_title: ref('T-Shirt'),
+                brand: 'Marconyu',
                 image,
                 InStock: ref(0),
                 details:['50% cotton', '30% polyester', '20% wool'],
